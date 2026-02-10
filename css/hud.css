@@ -1,0 +1,199 @@
+/* ═══════════════════ HUD / UI Layer ═══════════════════ */
+#ui {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* ═══════════════════ Status Bars ═══════════════════ */
+#stats {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transform-origin: top left;
+}
+
+.stat-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(var(--hud-blur));
+    -webkit-backdrop-filter: blur(var(--hud-blur));
+    background: var(--hud-bg);
+    border: 1px solid var(--hud-border);
+    border-radius: var(--hud-radius);
+    padding: 6px 12px 6px 8px;
+    box-shadow: var(--hud-shadow);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stat-bar:hover {
+    transform: scale(1.05);
+}
+
+.stat-bar .icon {
+    font-size: 20px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.stat-bar .bar {
+    width: 130px;
+    height: 18px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stat-bar .fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-bar .fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    100% { transform: translateX(200%); }
+}
+
+#health-fill { background: var(--health); }
+#mana-fill { background: var(--mana); }
+
+.stat-bar .value {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ═══════════════════ Top Buttons ═══════════════════ */
+#top-buttons {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    display: flex;
+    gap: 10px;
+    z-index: 9999;
+    pointer-events: auto;
+}
+
+.top-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--hud-radius);
+    border: 1px solid var(--hud-border);
+    background: linear-gradient(135deg, rgba(30, 30, 60, 0.55), rgba(10, 10, 25, 0.75));
+    backdrop-filter: blur(var(--hud-blur));
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    font-size: 20px;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+
+.top-btn:active { transform: scale(0.96); }
+.top-btn:hover {
+    border-color: rgba(162, 155, 254, 0.55);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.42);
+}
+
+/* ═══════════════════ FPS / Time Display ═══════════════════ */
+#fps {
+    position: absolute;
+    top: 70px;
+    right: 100px;
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    font-family: monospace;
+}
+
+#time-display {
+    position: absolute;
+    top: 70px;
+    right: 15px;
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+}
+
+/* ═══════════════════ Info Bar ═══════════════════ */
+#info {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+#info .highlight {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+/* ═══════════════════ Item Hint ═══════════════════ */
+.item-hint {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    font-weight: 600;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+/* ═══════════════════ Fullscreen Button ═══════════════════ */
+#fullscreen-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: rgba(20,20,40,0.5);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    pointer-events: auto;
+}

@@ -1,0 +1,179 @@
+/* ═══════════════════ Inventory Panel ═══════════════════ */
+#inventory-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+#inventory-overlay.show { display: flex; }
+
+#inventory-panel {
+    width: min(720px, 95vw);
+    max-height: 88vh;
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(20, 20, 45, 0.95), rgba(10, 10, 30, 0.98));
+    border: 1px solid rgba(108, 92, 231, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(108, 92, 231, 0.15);
+    position: relative;
+    overflow: auto;
+}
+
+.inv-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+}
+
+.inv-left { flex: 1; min-width: 0; }
+.inv-right { width: 200px; flex: 0 0 200px; display: flex; flex-direction: column; gap: 10px; }
+
+.inv-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.inv-title { font-size: 16px; font-weight: 700; color: #fff; }
+
+.inv-capacity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inv-capacity-text { font-size: 12px; color: rgba(255, 255, 255, 0.6); }
+
+.inv-capacity-bar {
+    width: 60px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.inv-capacity-bar .fill {
+    height: 100%;
+    background: var(--secondary);
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+.inv-section { margin-bottom: 12px; }
+
+.inv-section-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.inv-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 4px;
+}
+
+.inv-slot {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.12s, background 0.12s;
+}
+
+.inv-slot:hover {
+    border-color: rgba(162, 155, 254, 0.4);
+    background: rgba(108, 92, 231, 0.08);
+}
+
+.inv-slot.selected {
+    border-color: var(--gold);
+    background: rgba(255, 234, 167, 0.06);
+}
+
+.inv-slot canvas {
+    width: 28px;
+    height: 28px;
+    image-rendering: pixelated;
+}
+
+.inv-slot .count {
+    position: absolute;
+    bottom: 1px;
+    right: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.inv-preview-box {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+    border-radius: 12px;
+    border: 2px solid rgba(108, 92, 231, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    display: grid;
+    place-items: center;
+}
+
+.inv-item-name { text-align: center; font-size: 14px; font-weight: 700; color: #fff; }
+.inv-item-meta { text-align: center; font-size: 11px; color: rgba(255, 255, 255, 0.5); }
+.inv-item-desc { text-align: center; font-size: 11px; color: rgba(255, 255, 255, 0.4); }
+
+.inv-action-row { display: flex; flex-direction: column; gap: 6px; }
+
+.inv-btn {
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.12s;
+}
+
+.inv-btn:hover { background: rgba(255, 255, 255, 0.1); }
+.inv-btn.primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; font-weight: 600; }
+.inv-btn.danger { border-color: rgba(239, 83, 80, 0.3); color: rgba(239, 83, 80, 0.9); }
+.inv-btn.danger:hover { background: rgba(239, 83, 80, 0.1); }
+
+.inv-hints {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.35);
+    line-height: 1.6;
+}
+
+#inv-held {
+    position: fixed;
+    z-index: 10001;
+    pointer-events: none;
+    width: 40px;
+    height: 40px;
+}

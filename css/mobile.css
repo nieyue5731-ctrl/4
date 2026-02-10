@@ -1,0 +1,165 @@
+/* ═══════════════════ Mobile Controls ═══════════════════ */
+#mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    pointer-events: none;
+}
+
+html.is-mobile #mobile-controls { display: block; }
+
+.joystick-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: var(--joy-size);
+    height: var(--joy-size);
+    pointer-events: auto;
+    touch-action: none;
+}
+
+.joystick-base {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+}
+
+.joystick-thumb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--joy-pad);
+    height: var(--joy-pad);
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--ui-accent), rgba(108, 92, 231, 0.7));
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}
+
+.action-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    pointer-events: auto;
+    touch-action: none;
+}
+
+.action-row {
+    display: flex;
+    gap: 12px;
+}
+
+.action-btn {
+    width: var(--btn-size);
+    height: var(--btn-size);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(20, 20, 40, 0.6);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    font-size: 24px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: transform 0.1s;
+}
+
+.action-btn:active, .action-btn.active {
+    transform: scale(0.92);
+    background: rgba(108, 92, 231, 0.3);
+    border-color: var(--ui-accent);
+}
+
+.jump-container {
+    position: fixed;
+    bottom: calc(20px + var(--btn-size) + 12px);
+    right: calc(20px + var(--btn-size) / 2 + 6px);
+    pointer-events: auto;
+    touch-action: none;
+}
+
+/* ═══════════════════ Craft/Bag Toggle Buttons ═══════════════════ */
+#btn-craft-toggle {
+    position: fixed;
+    top: 45%;
+    right: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(20, 20, 40, 0.6);
+    backdrop-filter: blur(6px);
+    font-size: 20px;
+    color: #fff;
+    z-index: 300;
+    cursor: pointer;
+    display: none;
+    place-items: center;
+}
+
+html.is-mobile #btn-craft-toggle { display: grid; }
+
+#btn-bag-toggle {
+    position: fixed;
+    top: 60%;
+    right: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(20, 20, 40, 0.6);
+    backdrop-filter: blur(6px);
+    font-size: 20px;
+    color: #fff;
+    z-index: 300;
+    cursor: pointer;
+    display: none;
+    place-items: center;
+}
+
+html.is-mobile #btn-bag-toggle { display: grid; }
+
+/* ═══════════════════ Crosshair ═══════════════════ */
+#crosshair {
+    display: none;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 150;
+}
+
+html.is-mobile #crosshair { display: block; }
+
+/* ═══════════════════ Rotate Hint ═══════════════════ */
+#rotate-hint {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    font-size: 16px;
+}
+
+#rotate-hint .icon { font-size: 48px; }
+
+@media (orientation: portrait) and (pointer: coarse) {
+    #rotate-hint { display: flex; }
+}
